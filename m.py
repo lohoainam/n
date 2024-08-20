@@ -63,12 +63,12 @@ def clear_logs():
     try:
         with open(LOG_FILE, "r+") as file:
             if file.read() == "":
-                response = "Logs are already cleared. No data found ❌."
+                response = "Logs đã được xóa. Không có dữ liệu nào."
             else:
                 file.truncate(0)
-                response = "Logs cleared successfully ✅"
+                response = "Logs đã được xoá thành công"
     except FileNotFoundError:
-        response = "No logs found to clear."
+        response = "Không tìm thấy logs để xóa."
     return response
 
 # Function to record command logs
@@ -147,13 +147,12 @@ def add_user(message):
                 if set_approval_expiry_date(user_to_add, duration, time_unit):
                     response = f"User {user_to_add} added successfully for {duration} {time_unit}. Access will expire on {user_approval_expiry[user_to_add].strftime('%Y-%m-%d %H:%M:%S')} 👍."
                 else:
-                    response = "Failed to set approval expiry date. Please try again later."
+                    response = "Đặt ngày hết hạn không thành công. hãy thử lại sau."
             else:
-                response = "User already exists 🤦‍♂️."
+                response = "Người dũng đã tồn tại."
         else:
-            response = "Please specify a user ID and the duration (e.g., 1hour, 2days, 3weeks, 4months) to add 😘."
-    else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @mesh213 ❄."
+            response = "Vui lòng nhập ID người cần add và thời gian (e.g., 1hour, 2days, 3weeks, 4months) để thêm."
+    
 
     bot.reply_to(message, response)
 
@@ -165,7 +164,7 @@ def get_user_info(message):
     username = user_info.username if user_info.username else "N/A"
     user_role = "Admin" if user_id in admin_id else "User"
     remaining_time = get_remaining_approval_time(user_id)
-    response = f"👤 Your Info:\n\n🆔 User ID: <code>{user_id}</code>\n📝 Username: {username}\n🔖 Role: {user_role}\n📅 Approval Expiry Date: {user_approval_expiry.get(user_id, 'Not Approved')}\n⏳ Remaining Approval Time: {remaining_time}"
+    response = f"👤 Your Info:\n\n🆔 User ID: <code>{user_id}</code>\n📝 Username: {username}\n🔖 Level: {user_role}\n📅 Ngày hết hạn: {user_approval_expiry.get(user_id, 'Not Approved')}\n⏳ Thời gian còn lại: {remaining_time}"
     bot.reply_to(message, response, parse_mode="HTML")
 
 
@@ -182,14 +181,13 @@ def remove_user(message):
                 with open(USER_FILE, "w") as file:
                     for user_id in allowed_user_ids:
                         file.write(f"{user_id}\n")
-                response = f"User {user_to_remove} removed successfully 👍."
+                response = f"User {user_to_remove} Xoá thành công ."
             else:
-                response = f"User {user_to_remove} not found in the list ❌."
+                response = f"User {user_to_remove} không tìm thấy trong list."
         else:
-            response = '''Please Specify A User ID to Remove. 
-✅ Usage: /remove <userid>😘'''
-    else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @mesh213 ❄."
+            response = '''Nhập ID người dùng để xoá. 
+  Usage: /remove <userid>'''
+    
 
     bot.reply_to(message, response)
 
@@ -201,14 +199,13 @@ def clear_logs_command(message):
             with open(LOG_FILE, "r+") as file:
                 log_content = file.read()
                 if log_content.strip() == "":
-                    response = "Logs are already cleared. No data found ❌."
+                    response = ""Dữ liệu trong logs đã được xóa. Không còn thông tin để hiển thị."."
                 else:
                     file.truncate(0)
-                    response = "Logs Cleared Successfully ✅"
+                    response = "Dữ liệu trong logs đã được xoá"
         except FileNotFoundError:
-            response = "Logs are already cleared ❌."
-    else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @mesh213 ❄."
+            response = "Logs đã được từ trước."
+    
     bot.reply_to(message, response)
 
 
@@ -220,14 +217,13 @@ def clear_users_command(message):
             with open(USER_FILE, "r+") as file:
                 log_content = file.read()
                 if log_content.strip() == "":
-                    response = "USERS are already cleared. No data found ❌."
+                    response = "Dữ liệu users đã được xóa. Không tìm thấy dữ liệu."
                 else:
                     file.truncate(0)
-                    response = "users Cleared Successfully ✅"
+                    response = "Xoá thành công các users"
         except FileNotFoundError:
-            response = "users are already cleared ❌."
-    else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @mesh213 ❄."
+            response = "Các users đã được xoá rồi."
+    
     bot.reply_to(message, response)
  
 
@@ -248,11 +244,10 @@ def show_all_users(message):
                         except Exception as e:
                             response += f"- User ID: {user_id}\n"
                 else:
-                    response = "No data found ❌"
+                    response = "Không tìm thấy data"
         except FileNotFoundError:
-            response = "No data found ❌"
-    else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @mesh213 ❄."
+            response = "không có data"
+    
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['logs'])
@@ -264,13 +259,12 @@ def show_recent_logs(message):
                 with open(LOG_FILE, "rb") as file:
                     bot.send_document(message.chat.id, file)
             except FileNotFoundError:
-                response = "No data found ❌."
+                response = "Không có data."
                 bot.reply_to(message, response)
         else:
-            response = "No data found ❌"
+            response = "Không có data"
             bot.reply_to(message, response)
-    else:
-        response = "ꜰʀᴇᴇ ᴋᴇ ᴅʜᴀʀᴍ ꜱʜᴀʟᴀ ʜᴀɪ ᴋʏᴀ ᴊᴏ ᴍᴜ ᴜᴛᴛʜᴀ ᴋᴀɪ ᴋʜɪ ʙʜɪ ɢᴜꜱ ʀʜᴀɪ ʜᴏ ʙᴜʏ ᴋʀᴏ ꜰʀᴇᴇ ᴍᴀɪ ᴋᴜᴄʜ ɴʜɪ ᴍɪʟᴛᴀ ʙᴜʏ:- @mesh213 ❄."
+  
         bot.reply_to(message, response)
 
 
@@ -279,7 +273,7 @@ def start_attack_reply(message, target, port, time):
     user_info = message.from_user
     username = user_info.username if user_info.username else user_info.first_name
     
-    response = f"🚀 𝗔𝘁𝘁𝗮𝗰𝗸 𝗦𝗲𝗻𝘁 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆! 🚀 \n\n𝐓𝐚𝐫𝐠𝐞𝐭: {target}\n𝐏𝐨𝐫𝐭: {port}\n𝐓𝐢𝐦𝐞: {time} 𝐒𝐞𝐜𝐨𝐧𝐝𝐬\n𝐌𝐞𝐭𝐡𝐨𝐝: PUBG"
+    response = f"🚀 𝗔𝘁𝘁𝗮𝗰𝗸 𝗦𝗲𝗻𝘁 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆! 🚀 \n\n𝐓𝐚𝐫𝐠𝐞𝐭: {target}\n𝐏𝐨𝐫𝐭: {port}\n𝐓𝐢𝐦𝐞: {time}\n𝗔𝘁𝘁𝗮𝗰𝗸𝗲𝗿 𝗡𝗮𝗺𝗲: {username}\n𝐌𝐞𝐭𝐡𝐨𝐝: PUBG"
     bot.reply_to(message, response)
 
 # Dictionary to store the last time each user ran the /bgmi command
@@ -335,13 +329,13 @@ def show_command_logs(message):
                 command_logs = file.readlines()
                 user_logs = [log for log in command_logs if f"UserID: {user_id}" in log]
                 if user_logs:
-                    response = "Your Command Logs:\n" + "".join(user_logs)
+                    response = "Lịch sử dùng lệnh:\n" + "".join(user_logs)
                 else:
-                    response = "❌ No Command Logs Found For You ❌."
+                    response = "🗣️ : Không tìm thấy lịch sử lệnh của bạn ."
         except FileNotFoundError:
-            response = "No command logs found."
+            response = ""Không tìm thấy lịch sử lệnh."
     else:
-        response = "You Are Not Authorized To Use This Command 😡."
+        response = "Bạn không thể dùng lệnh này."
 
     bot.reply_to(message, response)
 
@@ -370,9 +364,9 @@ Buy From :- @xiaocoderz
 @bot.message_handler(commands=['start'])
 def welcome_start(message):
     user_name = message.from_user.first_name
-    response = f'''Welcome to Arthur DDoS Bot! 
+    response = f'''Welcome to Xiao DDoS Bot! 
    
-    Tấn Công DDoS Miễn Phí Và Trả Phí
+XiaoNam Bot Free and Paid DDoS Attack Services
 
 Type /help to see the attack usage!
 
@@ -386,10 +380,9 @@ def welcome_rules(message):
     user_name = message.from_user.first_name
     response = f'''{user_name} Please Follow These Rules ⚠️:
 
-1. Dont Run Too Many Attacks !! Cause A Ban From Bot
-2. Dont Run 2 Attacks At Same Time Becz If U Then U Got Banned From Bot.
-3. MAKE SURE YOU JOINED https://t.me/+Pw7z83Ju54ljOGFl OTHERWISE NOT WORK
-4. We Daily Checks The Logs So Follow these rules to avoid Ban!!'''
+1. Không thực hiện quá nhiều cuộc tấn công cùng lúc!! Nếu không bạn sẽ bị ban khỏi bot
+2. Không được chạy 2 cuộc tấn công cùng lúc, không thì sẽ bị cấm sử dụng bot
+3. Chúng tôi theo dõi nhật ký hàng ngày, vì vậy hãy tuân thủ các quy định này để tránh bị cấm!!
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['plan'])
@@ -403,9 +396,9 @@ Vip 🌟 :
 -> Concurrents Attack : 5
 
 Pr-ice List💸 :
-Day-->80 Rs
-Week-->400 Rs
-Month-->1000 Rs
+Day-->50.000 Vnd
+Week-->100.000 Vnd
+Month-->200.000 Vnd
 '''
     bot.reply_to(message, response)
 
@@ -414,13 +407,12 @@ def welcome_plan(message):
     user_name = message.from_user.first_name
     response = f'''{user_name}, Admin Commands Are Here!!:
 
-💥 /add <userId> : Add a User.
-💥 /remove <userid> Remove a User.
-💥 /allusers : Authorised Users Lists.
-💥 /logs : All Users Logs.
-💥 /broadcast : Broadcast a Message.
-💥 /clearlogs : Clear The Logs File.
-💥 /clearusers : Clear The USERS File.
+/add <userId> : Triệu tập một thành viên mới vào hệ thống.
+/remove <userId> : Xóa sổ một tài khoản khỏi cơ sở dữ liệu.
+/allusers : Liệt kê các chiến binh đang hoạt động trong mạng lưới.
+/logs : Truy xuất toàn bộ lịch sử hoạt động.
+/broadcast : Truyền tải thông điệp tới tất cả node.
+/clearlogs : Xóa sạch mọi dấu vết từ các nhật ký.
 '''
     bot.reply_to(message, response)
 
@@ -430,19 +422,19 @@ def broadcast_message(message):
     if user_id in admin_id:
         command = message.text.split(maxsplit=1)
         if len(command) > 1:
-            message_to_broadcast = "⚠️ Message To All Users By Admin:\n\n" + command[1]
+            message_to_broadcast = " Tin Nhắn Được Admin Gửi Đến Tất Cả Users:\n\n" + command[1]
             with open(USER_FILE, "r") as file:
                 user_ids = file.read().splitlines()
                 for user_id in user_ids:
                     try:
                         bot.send_message(user_id, message_to_broadcast)
                     except Exception as e:
-                        print(f"Failed to send broadcast message to user {user_id}: {str(e)}")
-            response = "Broadcast Message Sent Successfully To All Users 👍."
+                        print(f"Gửi tin nhắn đến người dùng không thành công. {user_id}: {str(e)}")
+            response = "Tin nhắn đã được gửi đến tất cả người dùng thành công."
         else:
-            response = "🤖 Please Provide A Message To Broadcast."
+            response = "Nhập tin nhắn cần gửi đến users."
     else:
-        response = "Only Admin Can Run This Command 😡."
+        response = "Lệnh Này chỉ dành cho Admin ."
 
     bot.reply_to(message, response)
 
