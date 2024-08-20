@@ -331,9 +331,9 @@ def show_command_logs(message):
                 if user_logs:
                     response = "Lịch sử dùng lệnh:\n" + "".join(user_logs)
                 else:
-                    response = "🗣️ : Không tìm thấy lịch sử lệnh của bạn ."
+                    response = "Không tìm thấy lịch sử lệnh của bạn ."
         except FileNotFoundError:
-            response = ""Không tìm thấy lịch sử lệnh."
+            response = "Không tìm thấy lịch sử lệnh."
     else:
         response = "Bạn không thể dùng lệnh này."
 
