@@ -200,7 +200,7 @@ def clear_logs_command(message):
                 log_content = file.read()
                 if log_content.strip() == "":
                     response = "Dữ liệu trong logs đã được xóa. Không còn thông tin để hiển thị."
-else:
+                else:
                     file.truncate(0)
                     response = "Dữ liệu trong logs đã được xoá"
         except FileNotFoundError:
